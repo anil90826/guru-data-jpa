@@ -90,7 +90,26 @@ public class DaoIntegrationTest {
         assert (owners.size() > 0);
     }
 
+    @Test
+    void testFindAllOwnerByLastName() {
+        List<Owners> owners = ownersDao.findAllOwnersByLastName("Torres");
+        assert (owners != null);
+        assert (owners.size() > 0);
+    }
 
+    @Test
+    void testFindAllOwnerByNameCriteria() {
+        List<Owners> owners = ownersDao.findAllOwnersByNameCriteria("Rosa", "Quarles");
+        assert (owners != null);
+        assert (owners.size() > 0);
+    }
+
+    @Test
+    void testFindAllOwnerByNameNativeQuery() {
+        List<Owners> owners = ownersDao.findAllOwnersByNameNativeQuery("Rosa", "Quarles");
+        assert (owners != null);
+        assert (owners.size() > 0);
+    }
 
 
 }

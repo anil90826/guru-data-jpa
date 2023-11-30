@@ -10,4 +10,9 @@ public interface OwnersDao {
 
     List<Owners> findAllOwnersByZipCode(String zipCode);
 
+    List<Owners> findAllOwnersByLastName(String lastName);
+
+    List<Owners> findAllOwnersByNameCriteria(String firstName, String lastName);
+
+    List<Owners> findAllOwnersByNameNativeQuery(String firstName, String lastName);
 }

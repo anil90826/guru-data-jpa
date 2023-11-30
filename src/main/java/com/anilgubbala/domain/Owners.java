@@ -1,14 +1,14 @@
 package com.anilgubbala.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
-@NamedQuery(name = "owners_find_all", query = "From Owners o Where o.zipCode = :zipCode")
+@NamedQueries({
+        @NamedQuery(name = "owners_find_all", query = "From Owners o Where o.zipCode = :zipCode"),
+        @NamedQuery(name = "owners_find_by_name", query = "From Owners o Where o.ownerSurname Like :ownerSurname")
+})
 @Data
 @Entity
 @Table(schema = "dbo", name = "owners")

@@ -48,6 +48,40 @@ public class OwnersDaoImpl implements OwnersDao {
         }
     }
 
+    @Override
+    public List<Owners> findAllOwnersByLastName(String lastName) {
+        EntityManager entityManager = getEntityManager();
+
+        try{
+            TypedQuery<Owners> query = entityManager.createNamedQuery("owners_find_by_name", Owners.class)
+                    .setParameter("ownerSurname", lastName);
+            return query.getResultList();
+        }finally {
+            entityManager.close();
+        }
+
+    }
+
+    @Override
+    public List<Owners> findAllOwnersByNameCriteria(String firstName, String lastName) {
+        return null;
+    }
+
+    @Override
+    public List<Owners> findAllOwnersByNameNativeQuery(String firstName, String lastName) {
+        EntityManager entityManager = getEntityManager();
+
+        try{
+            Query query = entityManager.createNativeQuery("SELECT * FROM Owners o" +
+                    " WHERE o.owner_name = ? AND o.owner_surname = ?", Owners.class);
+            query.setParameter(1, firstName);
+            query.setParameter(2, lastName);
+
+            return query.getResultList();
+        }finally {
+            entityManager.close();
+        }
+    }
 
     private EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
